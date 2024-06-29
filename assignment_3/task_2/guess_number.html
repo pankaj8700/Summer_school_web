@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Guessing Game</title>
+</head>
+<body>
+    <h2>Guess the Number Game</h2>
+    <form id="guessForm">
+        <input type="number" id="userGuess" placeholder="Enter your guess" required>
+        <button type="submit">Guess</button>
+    </form>
+    <p id="feedback"></p>
+
+    <script>
+        let targetNumber = Math.floor(Math.random() * 100) + 1; // Target number between 1 and 100
+
+        document.getElementById('guessForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting traditionally
+
+            const userGuess = parseInt(document.getElementById('userGuess').value, 10);
+            let feedback = '';
+
+            if (userGuess > targetNumber) {
+                feedback = 'Too high!';
+            } else if (userGuess < targetNumber) {
+                feedback = 'Too low!';
+            } else {
+                feedback = 'Correct! You guessed the number!';
+                // Optional: Disable further input after correct guess
+                document.getElementById('userGuess').disabled = true;
+                this.querySelector('button').disabled = true;
+            }
+
+            document.getElementById('feedback').innerText = feedback;
+        });
+    </script>
+</body>
+</html>
